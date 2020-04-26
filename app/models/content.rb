@@ -1,12 +1,14 @@
 class Content < ApplicationRecord
-  has_many :episodes #it will happen just with seasons
-
-  scope :movies, -> { where(is_a_season: 'm') }
-  scope :seasons, -> { where(is_a_season: 's') }
+  validates_presence_of :title, :plot, :content_type
   validate :number_for_seasons
 
+  has_many :episodes #it will happen just with seasons
+
+  scope :movies, -> { where(content_type: 'm') }
+  scope :seasons, -> { where(content_type: 's') }
+
   def number_for_seasons
-    if (self.type == 's' && self.number.nil?)
+    if (self.content_type == 's' && self.number.nil?)
       errors.add(:number, "A season must have a number")
     end
   end
