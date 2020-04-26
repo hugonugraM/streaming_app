@@ -43,10 +43,10 @@ RSpec.describe Content, content_type: :model do
   context 'scope tests' do
     before (:each) do
       movie1 = Content.create(title: 'the test title 1', plot: 'www.plot/url/location1', content_type:'m')
-      movie2 = Content.create(title: 'the test title 1', plot: 'www.plot/url/location1', content_type:'m')
+      movie2 = Content.create(title: 'the test title 2', plot: 'www.plot/url/location1', content_type:'m')
       season1 = Content.create(title: 'the test title 1', plot: 'www.plot/url/location1', number: 1, content_type:'s')
-      season2 = Content.create(title: 'the test title 1', plot: 'www.plot/url/location1', number: 2, content_type:'s')
-      season3 = Content.create(title: 'the test title 1', plot: 'www.plot/url/location1', number: 3, content_type:'s')
+      season2 = Content.create(title: 'the test title 2', plot: 'www.plot/url/location1', number: 2, content_type:'s')
+      season3 = Content.create(title: 'the test title 3', plot: 'www.plot/url/location1', number: 3, content_type:'s')
     end
 
     it 'should retrieve the 2 movies' do

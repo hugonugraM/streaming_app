@@ -1,6 +1,7 @@
 class Content < ApplicationRecord
   validates_presence_of :title, :plot, :content_type
   validate :number_for_seasons
+  validates :number, uniqueness: {scope: [:title]}
 
   has_many :episodes #it will happen just with seasons
 
