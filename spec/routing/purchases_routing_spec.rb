@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe PurchasesController, type: :routing do
   before do
-    @user = User.create(email: 'user@streaming.com')
+    @user = User.create(email: "user@streaming.com")
   end
   describe "routing" do
 

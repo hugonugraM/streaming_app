@@ -15,8 +15,8 @@ require "rails_helper"
 RSpec.describe "/contents", type: :request do
   before do
     @season1 = Content.create(title: "the season test title 1", plot: "www.plot/url/location1", number: 1, content_type:"s")
-    @episode1 = Episode.create(title: "the episode test title 1", plot: "www.plot/url/location", number: 1, season: @season1)
-    @episode2 = Episode.create(title: "the episode test title 2", plot: "www.plot/url/location2", number: 2, season: @season1)
+    @episode1 = Episode.create(title: "the episode test title 1", plot: "www.plot/url/location", number: 2, season: @season1)
+    @episode2 = Episode.create(title: "the episode test title 2", plot: "www.plot/url/location2", number: 1, season: @season1)
     @movie1 = Content.create(title: "the movie test title 1", plot: "www.plot/url/location1", content_type:"m")
     @movie2 = Content.create(title: "the movie test title 2", plot: "www.plot/url/location2", content_type:"m")
     @season2 = Content.create(title: "the season test title 1", plot: "www.plot/url/location2", number: 2, content_type:"s")
@@ -77,9 +77,9 @@ RSpec.describe "/contents", type: :request do
       expect( list_of_ids ).to eq( [@season1.id, @season2.id] )
     end
 
-    it "the season is retrieved with is episodes list" do
+    it "the season is retrieved with is episodes list with number order" do
       episodes_ids_list = JSON.parse(response.body).first["episodes"].map{ |content| content["id"] }
-      expect( episodes_ids_list ).to eq( [@episode1.id, @episode2.id] )
+      expect( episodes_ids_list ).to eq( [@episode2.id, @episode1.id] )
     end
   end
 end

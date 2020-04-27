@@ -3,7 +3,7 @@ class Content < ApplicationRecord
   validate :number_for_seasons
   validates :number, uniqueness: {scope: [:title]}
 
-  has_many :episodes, foreign_key: "season_id", class_name: "Episode" #it will happen just with seasons
+  has_many :episodes, -> { order :number }, foreign_key: "season_id", class_name: "Episode" #it will happen just with seasons
 
   scope :movies, -> { where(content_type: 'm') }
   scope :seasons, -> { where(content_type: 's') }
