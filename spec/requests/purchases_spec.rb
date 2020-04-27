@@ -16,10 +16,10 @@ RSpec.describe "/purchases", type: :request do
   before do
     @user = User.create(email: 'user@streaming.com')
     @content = Content.create(title: 'the purchase test title 1', plot: 'www.plot/url/location1', number: 1, content_type:'s')
-    @purchase_option = PurchaseOption.create(quality: 'hd', price: 10.00, content: @content1)
+    @purchase_option = PurchaseOption.create(quality: 'hd', price: 10.00, content: @content)
     @purchases_url = "/users/" + @user.id.to_s + "/purchases"
-    @valid_attributes = {purchase_option_id: @purchase_option.id}
-    @invalid_attributes = {content_id: @content.id}
+    @valid_attributes = {purchase_option_id: @purchase_option.id, user_id: @user.id}
+    @invalid_attributes = {content_id: @content.id, user_id: @user.id}
   end
 
   describe "POST /create" do
@@ -41,7 +41,7 @@ RSpec.describe "/purchases", type: :request do
       it "ensures that the content is on the user´s library" do
         post @purchases_url,
               params: { purchase: @valid_attributes }, as: :json
-        expect(@user.contents.map{ |content| id}).to eq([@content.id])
+        expect(@user.contents.map{ |content| content.id}).to eq([@content.id])
       end
     end
 
@@ -57,7 +57,7 @@ RSpec.describe "/purchases", type: :request do
         post @purchases_url,
               params: { purchase: @invalid_attributes }, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json")
+        expect(response.content_type).to eq("application/json; charset=utf-8")
       end
     end
   end

@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   get 'contents/movies', to: 'contents#movies'
   get 'contents/seasons', to: 'contents#seasons'
 
-  resources :users do
+  resources :users, only: [:library] do
     get 'library', to: 'users#library'
+    resources :purchases, only: [:create]
   end
 end
