@@ -13,7 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/contents", type: :request do
-  before :each do
+  before do
     @season1 = Content.create(title: 'the season test title 1', plot: 'www.plot/url/location1', number: 1, content_type:'s')
     @episode1 = Episode.create(title: 'the episode test title 1', plot: 'www.plot/url/location', number: 1, season: @season1)
     @episode2 = Episode.create(title: 'the episode test title 2', plot: 'www.plot/url/location2', number: 2, season: @season1)
