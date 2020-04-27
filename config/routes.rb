@@ -3,4 +3,8 @@ Rails.application.routes.draw do
   resources :contents, only: [:index]
   get 'contents/movies', to: 'contents#movies'
   get 'contents/seasons', to: 'contents#seasons'
+
+  resources :users do
+    get 'library', to: 'users#library'
+  end
 end

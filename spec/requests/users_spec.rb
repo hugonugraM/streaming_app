@@ -25,7 +25,7 @@ RSpec.describe "/users", type: :request do
   end
 
   before do
-    get '/users/' + @user.id.to_s + '/library', as: :json
+    get '/users/' + @user1.id.to_s + '/library', as: :json
   end
 
   describe "GET /library" do
@@ -34,8 +34,13 @@ RSpec.describe "/users", type: :request do
     end
 
     it "lists the user´s content" do
-      list_of_ids = JSON.parse(response.body).map{ |content| content['id'] }
+      list_of_ids = JSON.parse(response.body).map{ |content| content['content']['id'] }
       expect( list_of_ids ).to eq( [@content1.id, @content2.id] )
+    end
+
+    it "shows user´s content remaining time" do
+      list_of_ids = JSON.parse(response.body).map{ |content| content['content']['id'] }
+      expect( JSON.parse(response.body).first['remaining_time'].nil? ).to eq( false )
     end
   end
 end

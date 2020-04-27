@@ -5,7 +5,15 @@ class Purchase < ApplicationRecord
   belongs_to :purchase_option
   belongs_to :user
 
-  scope :active, -> { where( "created_at > ?", ( Time.current - 3.days )) }
+  scope :active, -> { where( "purchases.created_at > ?", ( Time.current - 2.days )) }
+
+  def remaining_time
+    2.days - (Time.current - self.created_at)
+  end
+
+  def content
+    self.purchase_option.content
+  end
 
   def prevent_user_duplicated_active_content
     if self.purchase_option && self.user
