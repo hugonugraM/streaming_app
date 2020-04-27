@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Episode, content_type: :model do
-  before :all do
+  before do
     @content = Content.create(title: 'the test title', plot: 'www.plot/url/location', number: 1, content_type:'s')
   end
   context 'validation tests' do

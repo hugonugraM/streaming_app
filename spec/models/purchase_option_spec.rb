@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PurchaseOption, content_type: :model do
   context 'validation tests' do
-    before :all do
+    before do
       @content = Content.create(title: 'the content test title', plot: 'www.plot/url/location', number: 2, content_type:'s')
     end
     it 'ensures quality presence' do

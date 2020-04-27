@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Purchase, content_type: :model do
   context 'validation tests' do
-    before :all do
+    before do
       @user = User.create(email: 'user@streaming.com')
       @content = Content.create(title: 'the content test title', plot: 'www.plot/url/location', number: 1, content_type:'s')
       @purchase_option = PurchaseOption.create(quality: 'hd', price: 10.00, content: @content)
@@ -24,12 +24,12 @@ RSpec.describe Purchase, content_type: :model do
   end
 
   context 'scope and unique tests' do
-    before :all do
+    before do
       @user1 = User.create(email: 'user@streaming.com')
-      @content1 = Content.create(title: 'the test title 1', plot: 'www.plot/url/location1', number: 1, content_type:'s')
+      @content1 = Content.create(title: 'the purchase test title 1', plot: 'www.plot/url/location1', number: 1, content_type:'s')
       @purchase_option_1 = PurchaseOption.create(quality: 'hd', price: 10.00, content: @content1)
       @purchase_option_2 = PurchaseOption.create(quality: 'sd', price: 5.00, content: @content1)
-      @content2 = Content.create(title: 'the test title 2', plot: 'www.plot/url/location2', number: 2, content_type:'s')
+      @content2 = Content.create(title: 'the purchase test title 2', plot: 'www.plot/url/location2', number: 2, content_type:'s')
       @purchase_option_3 = PurchaseOption.create(quality: 'hd', price: 10.00, content: @content2)
       @purchase1 = Purchase.create(user: @user1, purchase_option: @purchase_option_1)
       @purchase2 = Purchase.create(user: @user1, purchase_option: @purchase_option_3)
